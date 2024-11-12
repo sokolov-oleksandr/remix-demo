@@ -2,12 +2,13 @@ import type {MetaFunction} from '@remix-run/node';
 import {redirect} from '@remix-run/react';
 import {useTranslation} from 'react-i18next';
 
-import {Stack} from '@mui/material';
+import {Stack, useMediaQuery} from '@mui/material';
 
 import {useQueryProductsList} from '~/services/products';
 
 import {SkeletonOnLoading} from '~/global/components/skeleton-on-loading';
 import {AppButton} from '~/global/components/app-button';
+import theme from '~/global/components/mui/theme';
 
 import {ProductsTable} from './components/table';
 
@@ -29,6 +30,7 @@ export const clientLoader = async () => {
 export default function Products() {
   const {t} = useTranslation(['common']);
   const {data, isLoading} = useQueryProductsList();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   //
   //
@@ -43,7 +45,7 @@ export default function Products() {
         </SkeletonOnLoading>
       </Stack>
 
-      <ProductsTable data={data?.result} isLoading={isLoading} />
+      {isMobile ? null : <ProductsTable data={data?.result} isLoading={isLoading} />}
     </>
   );
 }
