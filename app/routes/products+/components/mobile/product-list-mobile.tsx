@@ -6,14 +6,19 @@ import {ApiProduct} from '~/api-client/types';
 import {useDeleteItem} from '~/routes/products+/hooks/use-delete-item';
 
 import {ProductCardMobile} from './product-card-mobile';
+import ProductCardSkeleton from './product-card-skeleton';
 
 type ProductListMobileProps = {
   data?: ApiProduct[];
   isLoading: boolean;
 };
 
-const ProductListMobile: React.FC<ProductListMobileProps> = ({data}) => {
+const ProductListMobile: React.FC<ProductListMobileProps> = ({data, isLoading}) => {
   const {doDeleteItem} = useDeleteItem();
+
+  if (isLoading) {
+    return <ProductCardSkeleton />;
+  }
 
   return (
     <Grid2 container spacing={2}>
