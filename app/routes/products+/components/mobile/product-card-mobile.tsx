@@ -47,7 +47,7 @@ export const ProductCardMobile: FC<ProductCardMobileProps> = ({product, doDelete
         sx={{
           width: '100%',
           objectFit: 'cover',
-          margin: 1,
+          padding: 1,
         }}
       />
       <CardContent sx={{display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
