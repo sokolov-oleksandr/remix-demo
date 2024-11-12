@@ -5,15 +5,15 @@ import {RemixI18Next} from 'remix-i18next/server';
 
 import i18n from '~/localization/i18n'; // your i18n configuration file
 
-import {getSupportedLanguageFromRequest} from './resource';
+import {getSupportedLanguageFromRequest, languagesDefault} from './resource';
 
 //
 //
 
 const i18next = new RemixI18Next({
   detection: {
-    supportedLanguages: i18n.supportedLngs as any,
-    fallbackLanguage: i18n.fallbackLng as any,
+    supportedLanguages: Array.isArray(i18n.supportedLngs) ? i18n.supportedLngs : [],
+    fallbackLanguage: typeof i18n.fallbackLng === 'string' ? i18n.fallbackLng : languagesDefault,
     findLocale: async request => {
       return getSupportedLanguageFromRequest(request) as string;
     },
