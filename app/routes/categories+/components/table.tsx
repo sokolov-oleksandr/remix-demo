@@ -1,5 +1,4 @@
 import {useTranslation} from 'react-i18next';
-import {useSnackbar} from 'notistack';
 
 import {Paper, Table, TableBody, TableContainer} from '@mui/material';
 
@@ -8,6 +7,7 @@ import {useMutationCategoriesDelete} from '~/services/categories';
 import {TableRowEmpty} from '~/global/components/table-row-empty';
 
 import {ApiCategory} from '~/api-client/types';
+import {useCustomSnackbar} from '~/hooks/use-custom-snackbar';
 
 import {CategoriesTableRow} from './table-row';
 import {CategoriesTableRowSkeleton} from './table-row-skeleton';
@@ -18,7 +18,7 @@ import {CategoriesTableHead} from './table-head';
 
 export const CategoriesTable = ({data, isLoading}: {data?: ApiCategory[]; isLoading: boolean}) => {
   const {t} = useTranslation();
-  const {enqueueSnackbar} = useSnackbar();
+  const {enqueueSnackbar} = useCustomSnackbar();
   const deleteItem = useMutationCategoriesDelete();
 
   //
@@ -30,10 +30,10 @@ export const CategoriesTable = ({data, isLoading}: {data?: ApiCategory[]; isLoad
       {id: item.categoryId},
       {
         onSuccess: async result => {
-          result?.meta?.message && enqueueSnackbar(result?.meta?.message, {variant: 'success'});
+          enqueueSnackbar({variant: 'success', message: result?.meta?.message});
         },
         onError: err => {
-          enqueueSnackbar(err?.message || 'unknown error', {variant: 'error'});
+          enqueueSnackbar({variant: 'error', message: err?.message || 'unknown error'});
         },
       },
     );

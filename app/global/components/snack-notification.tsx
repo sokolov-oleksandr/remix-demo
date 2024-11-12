@@ -18,16 +18,17 @@ declare module 'notistack' {
   }
 }
 
-interface SnackNotificationProps extends NotificationProps {
+export interface SnackNotificationProps extends NotificationProps {
   noClose?: boolean;
   alertProps?: AlertProps;
+  variant: 'default' | 'warning' | 'success' | 'info' | 'error';
 }
 
 //
 
 export const SnackNotification = React.forwardRef<
   HTMLDivElement,
-  SnackNotificationProps & CustomContentProps
+  SnackNotificationProps & Omit<CustomContentProps, 'variant'>
 >(
   (
     {heading, headingProps, message, messages, messagesProps, noClose, alertProps, ...props},

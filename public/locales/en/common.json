@@ -22,5 +22,6 @@
 	"lang": {
 		"en": "English",
 		"ar": "Arabic"
-	}
+	},
+	"noResults": "No results found"
 }

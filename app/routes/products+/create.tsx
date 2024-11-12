@@ -3,7 +3,6 @@ import {Form, redirect} from '@remix-run/react';
 import {useForm, FormProvider} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useTranslation} from 'react-i18next';
-import {useSnackbar} from 'notistack';
 import * as yup from 'yup';
 
 import {useMutationProductsCreate} from '~/services/products';
@@ -11,6 +10,8 @@ import {useMutationProductsCreate} from '~/services/products';
 import {useI18nNavigate} from '~/global/hooks/use-i18n-navigate';
 
 import {PageShell} from '~/global/components/page-shell';
+
+import {useCustomSnackbar} from '~/hooks/use-custom-snackbar';
 
 import {ProductsForm} from './components/form';
 
@@ -53,7 +54,7 @@ const schema = yup
 
 export default function ProductsCreate() {
   const navigate = useI18nNavigate();
-  const {enqueueSnackbar} = useSnackbar();
+  const {enqueueSnackbar} = useCustomSnackbar();
   const {t} = useTranslation(handle.i18n);
   const mutate = useMutationProductsCreate();
 
@@ -62,7 +63,7 @@ export default function ProductsCreate() {
     defaultValues: {
       title: {en: '', ar: ''},
       description: {en: '', ar: ''},
-      categoryId: undefined,
+      categoryId: '',
       price: undefined,
       priceSale: undefined,
       image: undefined,

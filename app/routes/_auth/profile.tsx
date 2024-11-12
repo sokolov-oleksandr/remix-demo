@@ -2,9 +2,7 @@ import type {MetaFunction} from '@remix-run/node';
 import {Form, redirect, useLoaderData} from '@remix-run/react';
 import {useForm, FormProvider} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {useMutation} from '@tanstack/react-query';
 import {useTranslation} from 'react-i18next';
-import {useSnackbar} from 'notistack';
 import * as yup from 'yup';
 
 import {queryClient} from '~/services/client';
@@ -13,6 +11,8 @@ import {useQueryProfile, useMutationProfileUpdate} from '~/services/auth';
 import {PageShell} from '~/global/components/page-shell';
 import {AppInputPassword} from '~/global/components/app-input-password';
 import {AppInput} from '~/global/components/app-input';
+
+import {useCustomSnackbar} from '~/hooks/use-custom-snackbar';
 
 //
 //
@@ -47,7 +47,7 @@ const schema = yup
 
 export default function Profile() {
   const {t} = useTranslation(handle.i18n);
-  const {enqueueSnackbar} = useSnackbar();
+  const {enqueueSnackbar} = useCustomSnackbar();
   const mutate = useMutationProfileUpdate();
   const current = useLoaderData<typeof clientLoader>();
 
