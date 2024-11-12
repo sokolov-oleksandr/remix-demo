@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Grid2, Skeleton, Card, CardContent, Stack, Box} from '@mui/material';
 
-const ProductCardSkeleton: React.FC = () => {
+export const ProductCardSkeleton: React.FC = () => {
   return (
     <Grid2 container spacing={2}>
       <Card sx={{display: 'flex', flexDirection: 'column', width: '100%', mb: 2}}>
@@ -35,5 +35,3 @@ const ProductCardSkeleton: React.FC = () => {
     </Grid2>
   );
 };
-
-export default ProductCardSkeleton;

@@ -11,7 +11,7 @@ import {AppButton} from '~/global/components/app-button';
 import theme from '~/global/components/mui/theme';
 
 import {ProductsTable} from './components/table';
-import ProductListMobile from './components/mobile/product-list-mobile';
+import {ProductListMobile} from './components/mobile/product-list-mobile';
 
 //
 //
