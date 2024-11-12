@@ -63,7 +63,7 @@ export default function ProductsCreate() {
     defaultValues: {
       title: {en: '', ar: ''},
       description: {en: '', ar: ''},
-      categoryId: undefined,
+      categoryId: '',
       price: undefined,
       priceSale: undefined,
       image: undefined,
