@@ -1,7 +1,6 @@
 import type {MetaFunction} from '@remix-run/node';
 import {Form, redirect} from '@remix-run/react';
 import {useTranslation} from 'react-i18next';
-import {useSnackbar} from 'notistack';
 import * as yup from 'yup';
 import {useForm, FormProvider} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -14,6 +13,7 @@ import {PageShell} from '~/global/components/page-shell';
 import {AppInputPassword} from '~/global/components/app-input-password';
 import {AppInput} from '~/global/components/app-input';
 
+import {useCustomSnackbar} from '~/hooks/use-custom-snackbar';
 import {apiSaveTokens} from '~/api-client/utils/tokens';
 
 //
@@ -45,7 +45,7 @@ const schema = yup
 
 export default function SignUp() {
   const {t} = useTranslation(handle.i18n);
-  const {enqueueSnackbar} = useSnackbar();
+  const {enqueueSnackbar} = useCustomSnackbar();
   const mutate = useMutationSignUp();
   const navigate = useI18nNavigate();
 

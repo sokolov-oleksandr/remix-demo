@@ -2,7 +2,6 @@ import type {MetaFunction} from '@remix-run/node';
 import {ClientLoaderFunctionArgs, Form, redirect, useLoaderData} from '@remix-run/react';
 import {useForm, FormProvider} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {useSnackbar} from 'notistack';
 import * as yup from 'yup';
 import {useTranslation} from 'react-i18next';
 
@@ -12,6 +11,8 @@ import {useQueryProductsGet, useMutationProductsUpdate} from '~/services/product
 import {useI18nNavigate} from '~/global/hooks/use-i18n-navigate';
 
 import {PageShell} from '~/global/components/page-shell';
+
+import {useCustomSnackbar} from '~/hooks/use-custom-snackbar';
 
 import {ProductsForm} from './components/form';
 
@@ -65,7 +66,7 @@ const schema = yup
 export default function ProductsCreate() {
   const {t} = useTranslation(handle.i18n);
   const navigate = useI18nNavigate();
-  const {enqueueSnackbar} = useSnackbar();
+  const {enqueueSnackbar} = useCustomSnackbar();
   const {item} = useLoaderData<typeof clientLoader>();
   const mutate = useMutationProductsUpdate();
 

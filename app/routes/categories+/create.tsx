@@ -1,21 +1,17 @@
 import type {MetaFunction} from '@remix-run/node';
 import {Form, redirect} from '@remix-run/react';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {useMutation} from '@tanstack/react-query';
 import {useTranslation} from 'react-i18next';
-import {useSnackbar} from 'notistack';
 import * as yup from 'yup';
 import {useForm, FormProvider} from 'react-hook-form';
-
-import {Box} from '@mui/material';
 
 import {useMutationCategoriesCreate} from '~/services/categories';
 
 import {useI18nNavigate} from '~/global/hooks/use-i18n-navigate';
 
-import {AppInputSwitch} from '~/global/components/app-input-switch';
 import {PageShell} from '~/global/components/page-shell';
-import {AppInput} from '~/global/components/app-input';
+
+import {useCustomSnackbar} from '~/hooks/use-custom-snackbar';
 
 import {CategoriesForm} from './components/form';
 
@@ -50,7 +46,7 @@ const schema = yup
 
 export default function CategoriesCreate() {
   const {t} = useTranslation(handle.i18n);
-  const {enqueueSnackbar} = useSnackbar();
+  const {enqueueSnackbar} = useCustomSnackbar();
   const mutate = useMutationCategoriesCreate();
   const navigate = useI18nNavigate();
 
